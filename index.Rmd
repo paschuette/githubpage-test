@@ -68,4 +68,20 @@ leaflet(locations) %>%
   addMarkers(~ Longitude, ~ Latitude, popup = ~ Location)
 ```
 
+When you knit and view the results of this cell locally (on your own computer), you will see a map with icons marking the locations. However, when you push the html to GitHub and view your page there, you’ll see a map with no icons (as of the date of this training). This appears to be due to a certificate issue with server that provides the leaflet icons. There is a workaround, but it adds several more lines of code
+
+# Use a custom marker so Leaflet doesn't try to grab the marker images from 
+# its CDN (this was brought up in 
+# https://github.com/NCEAS/sasap-training/issues/22)
+
+```{r}
+markerIcon <- makeIcon(
+  iconUrl = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+  iconWidth = 25, iconHeight = 41,
+  iconAnchorX = 12, iconAnchorY = 41,
+  shadowUrl = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+  shadowWidth = 41, shadowHeight = 41,
+  shadowAnchorX = 13, shadowAnchorY = 41
+)
+```
 
